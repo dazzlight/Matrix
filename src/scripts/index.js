@@ -1,3 +1,5 @@
-import '../styles/index.scss';
-
-console.log('webpack starterkit');
+import "@fortawesome/fontawesome-free/js/all";
+import "bootstrap";
+//Styles
+import "../styles/index.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
