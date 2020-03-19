@@ -57,8 +57,16 @@ function addNewItem(value, quadrant) {
   const newLi = getLiWithText(value);
   list.appendChild(newLi);
 }
+function delLiTodo() {
+  this.parentElement.remove();
+}
 
-function getLiWithText(value) {
+function moveIntoDone(newListItem, quadrant) {
+  const listDone = quadrant.getElementsByClassName("doneList")[0];
+  listDone.appendChild(newListItem);
+}
+
+function getLiWithText(value, quadrant) {
   const newListItem = document.createElement("li");
   const checkbox = getCheckBox();
   const text = document.createTextNode(" " + value);
@@ -68,6 +76,9 @@ function getLiWithText(value) {
   newListItem.appendChild(text);
   newListItem.appendChild(space);
   newListItem.appendChild(icon);
+  checkbox.addEventListener("click", () => {
+    moveIntoDone(newListItem, quadrant);
+  });
   return newListItem;
 }
 
@@ -80,5 +91,17 @@ function getCheckBox() {
 function getDeleteIcon() {
   const i = document.createElement("i");
   i.className = "fas fa-trash";
-  return i;
+  const spanIcon = document.createElement("span");
+  spanIcon.appendChild(i);
+  spanIcon.addEventListener("click", delLiTodo);
+  return spanIcon;
 }
+
+// function moveIntoTodo(newListItem, quadrant) {
+//   const listDone = quadrant.getElementsByClassName("todoList")[0];
+//   listDone.appendChild(newListItem);
+//   const checkbox = newListItem.getElementsByTagName("input")[0];
+//   checkbox.addEventListener("click", () => {
+//     moveIntoDone(newListItem, quadrant);
+//   });
+// }
