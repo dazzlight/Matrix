@@ -54,7 +54,7 @@ function getInputValue(quadrant) {
 
 function addNewItem(value, quadrant) {
   const list = quadrant.getElementsByClassName("todoList")[0];
-  const newLi = getLiWithText(value);
+  const newLi = getLiWithText(value, quadrant);
   list.appendChild(newLi);
 }
 function delLiTodo() {
@@ -64,6 +64,10 @@ function delLiTodo() {
 function moveIntoDone(newListItem, quadrant) {
   const listDone = quadrant.getElementsByClassName("doneList")[0];
   listDone.appendChild(newListItem);
+  const checkbox = newListItem.getElementsByTagName("input")[0];
+  checkbox.addEventListener("click", () => {
+    moveIntoTodo(newListItem, quadrant);
+  });
 }
 
 function getLiWithText(value, quadrant) {
@@ -97,11 +101,11 @@ function getDeleteIcon() {
   return spanIcon;
 }
 
-// function moveIntoTodo(newListItem, quadrant) {
-//   const listDone = quadrant.getElementsByClassName("todoList")[0];
-//   listDone.appendChild(newListItem);
-//   const checkbox = newListItem.getElementsByTagName("input")[0];
-//   checkbox.addEventListener("click", () => {
-//     moveIntoDone(newListItem, quadrant);
-//   });
-// }
+function moveIntoTodo(newListItem, quadrant) {
+  const listTodo = quadrant.getElementsByClassName("todoList")[0];
+  listTodo.appendChild(newListItem);
+  const checkbox = newListItem.getElementsByTagName("input")[0];
+  checkbox.addEventListener("click", () => {
+    moveIntoDone(newListItem, quadrant);
+  });
+}
